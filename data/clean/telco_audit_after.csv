@@ -1,0 +1,7 @@
+metric,value
+Missing cells after cleaning,0
+Remaining TotalCharges missing,0
+Duplicate rows,0
+Negative/invalid tenure,0
+Non-positive MonthlyCharges,0
+Invalid Churn label,0

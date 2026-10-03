@@ -1,0 +1,180 @@
+Interactive HR Attrition & Customer Churn Analytics Dashboard
+Interactive RShiny dashboard for two industry use cases:
+HR Attrition Analytics
+Customer Churn Analytics
+Tech Stack
+R 4.6.1
+RStudio
+RShiny
+dplyr
+tidyr
+readr
+ggplot2
+plotly
+DT
+scales
+Project Structure
+```text
+RShiny_HR_Churn_Dashboard/
+├── app.R
+├── RShiny_HR_Churn_Dashboard.Rproj
+├── README.md
+├── TECHNICAL_REPORT.docx
+├── data/
+│   ├── HR_Employee_Attrition_raw.csv
+│   └── Telco_Customer_Churn_raw.csv
+├── www/
+│   └── custom.css
+└── screenshots/
+    ├── hr_overview.png
+    ├── hr_detailed_analysis.png
+    ├── hr_data_explorer.png
+    ├── churn_overview.png
+    ├── churn_detailed_analysis.png
+    └── churn_data_explorer.png
+```
+Use Case 1 — HR Attrition Analytics
+Executive Overview
+Filters:
+Department
+Job Role
+Age Range
+Years at Company
+Overtime
+KPIs:
+Total Employees
+Total Attrition
+Attrition Rate
+Average Monthly Income
+Average Years at Company
+Visualizations:
+Observed Attrition by Department — Bar Chart
+Salary Distribution by Department — Box Plot
+Years at Company vs Monthly Income — Scatter Plot
+Detailed Analysis
+Business question:
+> Does overtime and tenure provide a useful breakdown of observed attrition across departments?
+Additional analysis:
+Observed Attrition by Overtime
+Filtered segment summary
+Reactive business-question output
+Data Explorer
+Filtered employee records
+Search
+Sorting
+Pagination
+Summary statistics
+Download filtered HR data
+Use Case 6 — Customer Churn Analytics
+Executive Overview
+Filters:
+Contract Type
+Internet / Service Type
+Tenure Range
+Monthly Charges Range
+Payment Method
+KPIs:
+Total Customers
+Churned Customers
+Churn Rate
+Average Monthly Charges
+Average Tenure
+Visualizations:
+Observed Churn by Contract — Bar Chart
+Tenure vs Monthly Charges — Scatter Plot
+Monthly Charges Distribution — Box Plot
+Detailed Analysis
+Business question:
+> How do contract type and tenure jointly relate to observed churn, and which service/payment segment warrants further investigation?
+Additional analysis:
+Observed Churn by Payment Method
+Filtered segment summary
+Reactive business-question output
+Data Explorer
+Filtered customer records
+Search
+Sorting
+Pagination
+Summary statistics
+Download filtered customer data
+Data Preparation
+HR Dataset
+1,470 records and 35 variables
+Missing-value validation
+Duplicate validation
+Data-type validation
+Category validation
+Suspicious-value checks
+Derived variables: `AttritionFlag`, `AgeBand`, `TenureBand`, `IncomeBand`
+Customer Churn Dataset
+7,043 records and 21 original variables
+`TotalCharges` converted to numeric
+Blank zero-tenure `TotalCharges` values handled as zero
+Duplicate validation
+Data-type validation
+Category validation
+Suspicious-value checks
+Derived variables: `ChurnFlag`, `SeniorCitizenLabel`, `TenureBand`, `MonthlyChargeBand`, `ServiceCount`
+Technical Architecture
+```text
+Raw CSV Data
+     |
+     v
+Validation & Cleaning
+     |
+     v
+Derived Variables
+     |
+     v
+Reactive Filters
+     |
+     +------------------+
+     |                  |
+     v                  v
+KPI Computation     Data Summaries
+     |                  |
+     v                  v
+Visualization      Data Explorer
+     |                  |
+     +--------+---------+
+              |
+              v
+      Interactive Dashboard
+              |
+              v
+        Filtered CSV Export
+```
+Advanced Shiny Features
+`reactive()` for dynamic filtered datasets
+`observeEvent()` for interactive behavior
+`updateSelectInput()` for dynamic HR Job Role choices
+`conditionalPanel()` for contextual guidance
+Plotly interactive charts
+`downloadHandler()` for filtered-data export
+How to Run
+Open `RShiny_HR_Churn_Dashboard.Rproj` in RStudio.
+Install packages:
+```r
+install.packages(c(
+  "shiny", "dplyr", "tidyr", "readr",
+  "ggplot2", "plotly", "DT", "scales"
+))
+```
+Run:
+```r
+shiny::runApp(".")
+```
+Or click Run App in RStudio.
+The application validates the expected source data:
+HR: 1,470 rows
+Telco: 7,043 rows
+With all Customer Churn filters set to `All`, the expected baseline is:
+Total Customers: 7,043
+Churned Customers: 1,869
+Churn Rate: approximately 26.5%
+Submission Contents
+Include the RShiny source code, datasets, CSS, technical report, dashboard screenshots, and this README.
+Scope
+This dashboard is for exploratory analytics. Attrition and churn differences shown in the dashboard are descriptive associations in the supplied datasets and are not presented as causal effects.
+Author
+Abirami Ramanathan

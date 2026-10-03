@@ -1,0 +1,7 @@
+check,count
+Age outside 18-60,0
+YearsAtCompany outside 0-40,0
+MonthlyIncome <= 0,0
+YearsAtCompany > TotalWorkingYears,0
+Invalid Attrition label,0
+Invalid OverTime label,0
